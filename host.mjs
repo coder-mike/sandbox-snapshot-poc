@@ -11,8 +11,7 @@ resume();
 function begin() {
   const sandbox = new Sandbox({ globalThis });
 
-  const filename = path.resolve('app.js')
-  const appText = fs.readFileSync(filename, 'utf-8');
+  const appText = fs.readFileSync('app.js', 'utf-8');
   const { incr } = sandbox.evaluateCommonJsModule(appText);
 
   assert.equal(incr(), 1);
