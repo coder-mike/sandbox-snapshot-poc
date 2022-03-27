@@ -2,13 +2,13 @@
 
 ## App
 
-The file [app.js](app.js) represents a JavaScript application whose process we want to be able to snapshot to a file and then later resume from the snapshot file to continue where it left off. It demonstrates access to IO (via the `console`) and statefulness (via the `counter` variable).
+The file [app.js](#file-app-js) represents a JavaScript application whose process we want to be able to snapshot to a file and then later resume from the snapshot file to continue where it left off. It demonstrates access to IO (via the `console`) and statefulness (via the `counter` variable).
 
 "Snapshotting" in this context means capturing the full state of the app in form that can be saved to file, like with [Microvium snapshots](https://coder-mike.com/blog/2020/05/15/snapshotting-vs-bundling/). It logically includes the full state of the JavaScript heap and all the variables, including those nested in function closures.
 
 ## Host
 
-The file [host.mjs](host.mjs) is the entry point to the demonstration and can be run using `node host.mjs`. It runs the app and produces the following console output:
+The file [host.mjs](#file-host-mjs) is the entry point to the demonstration and can be run using `node host.mjs`. It runs the app and produces the following console output:
 
 ```
 Starting app
