@@ -22,7 +22,7 @@ Incrementing counter from 4 to 5
 Incrementing counter from 5 to 6
 ```
 
-It consists of two parts, `begin` and `resume`. 
+It consists of two parts, `begin` and `resume`.
 
 `begin` starts the app and calls `incr` a few times to change the app's state. It then snapshots the app's state to file.
 
@@ -44,7 +44,7 @@ The sandbox API is simple:
 
 Node does not have any builtin capability to perform snapshotting. This entire experiment is to test out a completely novel way of achieving snapshotting of a JavaScript app without having engine support for it.
 
-The essence of how it works is that it treats the app like a deterministic state machine. This is valid because JavaScript is single threaded. The state of any state machine is unambiguously determined by the initial state and all the inputs. 
+The essence of how it works is that it treats the app like a deterministic state machine. This is valid because JavaScript is single threaded. The state of any state machine is unambiguously determined by the initial state and all the inputs.
 
 The sandbox records all inputs to the app (the initial state is just the empty sandbox) and saves these as the snapshot data. To restore the app state from the snapshot, it creates an empty sandbox and replays the saved inputs.
 
@@ -59,4 +59,20 @@ The duplex communication channel is recorded continuosly. When the host asks to 
 
 When resuming the app from a snapshot, an empty sandbox is created, and all the recorded communication is replayed against the sandbox to reconstruct the state of the app. During the replay, calls from the app to the host do not actually go to the host since they already went to the host before the snapshot was taken; they are just verified against the expected output from the app. You can see this in the fact that all the old `console.log` messages do not appear in the terminal again when the app is resumed. Similarly, the app would only see the pre-recorded responses from the original host during the replay, so even calls like `Math.random` will deterministically reproduce their original results during the replay.
 
-I've included `sandbox.mjs` for completeness, but it's probably a bit difficult to read unless you're familiar with the implementation of membranes and communication protocols.
+More detail is in [internals.md](internals.md)
+
+## WARNING - limitations
+
+### Debugger use
+
+Running a debugger on the app will cause the snapshot to be invalid. This is because the debugger may cause the app to make calls to the host or sandbox that were not recorded in the snapshot. This is just a limitation of this approach.
+
+### Ephemerals
+
+References to host objects other than the `globalThis` do not persist across snapshots, because there is no way to identify the equivalent object in the new host environment. This includes things like `console.log`. This is just a limitation of this approach.
+
+The example app does not hit this limitation because the `console.log` statements are implicitly re-accessing the `console` property on `globalThis` each time. But if you captured either the `console` or `log` object/function in a variable before the snapshot, the variable would no longer be valid after the snapshot is restored. It would hold a reference to a [revoked proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy/revocable).
+
+### Arrays and prototypes
+
+Currently the proxy system used by the membrane ignores object prototypes. This means that references to arrays, maps, etc., across the membrane will not work. This can be fixed in future but wasn't needed for the proof of concept.

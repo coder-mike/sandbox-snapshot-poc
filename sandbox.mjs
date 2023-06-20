@@ -39,7 +39,11 @@ export class Sandbox {
   takeSnapshot(captures) {
     const exportList = mapValues(captures, v => this.#dry.serialize(v));
     const ioJournal = this.#ioJournal;
-    const json = JSON.stringify({ ioJournal, exportList })
+    // Basically all host objects are treated as ephemeral until proven
+    // otherwise. Even the well-known ones are not guaranteed to exist in the
+    // target environment, although they probably will.
+    const ephemerals = [...this.#dry.objectsByLocalId.entries()].map(([id, obj]) => [id, typeof obj]);
+    const json = JSON.stringify({ ioJournal, exportList, ephemerals })
     const buffer = Buffer.from(json, 'utf-8')
     return buffer;
   }
@@ -77,7 +81,7 @@ export class Sandbox {
 
   #restoreFromSnapshot(snapshot) {
     const json = snapshot.toString('utf-8')
-    const { ioJournal, exportList } = JSON.parse(json)
+    const { ioJournal, exportList, ephemerals } = JSON.parse(json)
     this.#ioJournal = ioJournal;
     this.#mode = 'replay'
     this.#journalReplayCursor = 0
@@ -89,11 +93,19 @@ export class Sandbox {
       entry.type === 'action-to-wet' || unexpected();
       this.#sendToWet(entry.action)
     }
+    // Local IDs on the wet side that existed before the snapshot and are now
+    // invalid.
+    for (const [id, type] of ephemerals) {
+      // If the ID is still alive, skip it. This applies to well-known objects
+      if (this.#dry.objectsByLocalId.has(id)) continue;
+      this.#dry.defineEphemeral(id, type)
+    }
+
     this.#mode = 'live'
     const captures = mapValues(exportList, v => {
       // Resolve value inside app
       const wet = this.#wet.deserialize(v)
-      // Move back across the boundary (message travelling the opposite direction)
+      // Move back across the boundary (message traveling the opposite direction)
       const msg = this.#wet.serialize(wet)
       const dry = this.#dry.deserialize(msg)
       return dry
@@ -148,6 +160,8 @@ export class Sandbox {
 
   #expectNextJournalEntry(expect) {
     expect.index = this.#journalReplayCursor
+    // Hack because the journal has undefined values represented as missing.
+    expect = JSON.parse(JSON.stringify(expect))
     const entry = this.#nextJournalEntry()
     assert.deepEqual(expect, entry)
   }
@@ -226,6 +240,16 @@ class SerializingMembrane {
       objectType: 'object',
       id
     })
+  }
+
+  // Register a local ID for an object that no longer exists on this host (it
+  // may have existed before the snapshot)
+  defineEphemeral(id, type) {
+    if (type === 'function') {
+      this.objectsByLocalId.set(id, revokedFunctionProxy)
+    } else {
+      this.objectsByLocalId.set(id, revokedObjectProxy)
+    }
   }
 
   defineWellKnownRemote(id) {
@@ -381,3 +405,15 @@ class SerializingMembrane {
     return obj;
   }
 }
+
+const revokedObjectProxy = (() => {
+  const { proxy, revoke } = Proxy.revocable({}, {});
+  revoke();
+  return proxy;
+})();
+
+const revokedFunctionProxy = (() => {
+  const { proxy, revoke } = Proxy.revocable(() => {}, {});
+  revoke();
+  return proxy;
+})();

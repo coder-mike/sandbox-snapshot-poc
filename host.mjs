@@ -1,9 +1,13 @@
 import { Sandbox } from "./sandbox.mjs"
 import fs from 'fs'
 import assert from 'assert'
-import path from 'path'
 
-const globalThis = { console };
+const dummyConsole = {
+  log: (s) => {
+    console.log(s)
+  }
+}
+const globalThis = { console: dummyConsole };
 
 begin();
 resume();
@@ -21,6 +25,9 @@ function begin() {
   console.log('Saving snapshot');
   const snapshot = sandbox.takeSnapshot({ incr });
   fs.writeFileSync('snapshot.bin', snapshot);
+
+  const { ioJournal, exportList } = JSON.parse(snapshot.toString('utf-8'));
+  fs.writeFileSync('ioJournal.json', JSON.stringify(ioJournal, null, 2));
 }
 
 function resume() {

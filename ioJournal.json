@@ -1,0 +1,737 @@
+[
+  {
+    "type": "action-to-wet",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "controlChannel"
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "evaluateCommonJsModule"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "controlChannel"
+      }
+    },
+    "index": 0
+  },
+  {
+    "type": "return-from-wet",
+    "result": {
+      "type": "src-obj",
+      "id": 1,
+      "objectType": "function"
+    },
+    "index": 1
+  },
+  {
+    "type": "action-to-wet",
+    "action": {
+      "type": "apply",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "function",
+        "id": 1
+      },
+      "thisArg": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "controlChannel"
+      },
+      "args": [
+        {
+          "type": "literal",
+          "value": "console.log('Starting app')\r\nlet counter = 0;\r\nexports.incr = () => {\r\n  console.log(`Incrementing counter from ${counter} to ${counter + 1}`);\r\n  counter++;\r\n  return counter;\r\n}"
+        },
+        {
+          "type": "literal"
+        }
+      ]
+    },
+    "index": 2
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "has",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "console"
+      }
+    },
+    "index": 3
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "literal",
+      "value": true
+    },
+    "index": 4
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      },
+      "propertyKey": {
+        "type": "well-known-symbol",
+        "name": "unscopables"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      }
+    },
+    "index": 5
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "literal"
+    },
+    "index": 6
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "console"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      }
+    },
+    "index": 7
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "src-obj",
+      "id": 1,
+      "objectType": "object"
+    },
+    "index": 8
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 1
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "log"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 1
+      }
+    },
+    "index": 9
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "src-obj",
+      "id": 2,
+      "objectType": "function"
+    },
+    "index": 10
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "apply",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "function",
+        "id": 2
+      },
+      "thisArg": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 1
+      },
+      "args": [
+        {
+          "type": "literal",
+          "value": "Starting app"
+        }
+      ]
+    },
+    "index": 11
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "literal"
+    },
+    "index": 12
+  },
+  {
+    "type": "return-from-wet",
+    "result": {
+      "type": "src-obj",
+      "id": 2,
+      "objectType": "object"
+    },
+    "index": 13
+  },
+  {
+    "type": "action-to-wet",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 2
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "incr"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 2
+      }
+    },
+    "index": 14
+  },
+  {
+    "type": "return-from-wet",
+    "result": {
+      "type": "src-obj",
+      "id": 3,
+      "objectType": "function"
+    },
+    "index": 15
+  },
+  {
+    "type": "action-to-wet",
+    "action": {
+      "type": "apply",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "function",
+        "id": 3
+      },
+      "thisArg": {
+        "type": "literal"
+      },
+      "args": []
+    },
+    "index": 16
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "has",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "console"
+      }
+    },
+    "index": 17
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "literal",
+      "value": true
+    },
+    "index": 18
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      },
+      "propertyKey": {
+        "type": "well-known-symbol",
+        "name": "unscopables"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      }
+    },
+    "index": 19
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "literal"
+    },
+    "index": 20
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "console"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      }
+    },
+    "index": 21
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "src-obj",
+      "id": 1,
+      "objectType": "object"
+    },
+    "index": 22
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 1
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "log"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 1
+      }
+    },
+    "index": 23
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "src-obj",
+      "id": 2,
+      "objectType": "function"
+    },
+    "index": 24
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "apply",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "function",
+        "id": 2
+      },
+      "thisArg": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 1
+      },
+      "args": [
+        {
+          "type": "literal",
+          "value": "Incrementing counter from 0 to 1"
+        }
+      ]
+    },
+    "index": 25
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "literal"
+    },
+    "index": 26
+  },
+  {
+    "type": "return-from-wet",
+    "result": {
+      "type": "literal",
+      "value": 1
+    },
+    "index": 27
+  },
+  {
+    "type": "action-to-wet",
+    "action": {
+      "type": "apply",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "function",
+        "id": 3
+      },
+      "thisArg": {
+        "type": "literal"
+      },
+      "args": []
+    },
+    "index": 28
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "has",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "console"
+      }
+    },
+    "index": 29
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "literal",
+      "value": true
+    },
+    "index": 30
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      },
+      "propertyKey": {
+        "type": "well-known-symbol",
+        "name": "unscopables"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      }
+    },
+    "index": 31
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "literal"
+    },
+    "index": 32
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "console"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      }
+    },
+    "index": 33
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "src-obj",
+      "id": 1,
+      "objectType": "object"
+    },
+    "index": 34
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 1
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "log"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 1
+      }
+    },
+    "index": 35
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "src-obj",
+      "id": 2,
+      "objectType": "function"
+    },
+    "index": 36
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "apply",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "function",
+        "id": 2
+      },
+      "thisArg": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 1
+      },
+      "args": [
+        {
+          "type": "literal",
+          "value": "Incrementing counter from 1 to 2"
+        }
+      ]
+    },
+    "index": 37
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "literal"
+    },
+    "index": 38
+  },
+  {
+    "type": "return-from-wet",
+    "result": {
+      "type": "literal",
+      "value": 2
+    },
+    "index": 39
+  },
+  {
+    "type": "action-to-wet",
+    "action": {
+      "type": "apply",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "function",
+        "id": 3
+      },
+      "thisArg": {
+        "type": "literal"
+      },
+      "args": []
+    },
+    "index": 40
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "has",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "console"
+      }
+    },
+    "index": 41
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "literal",
+      "value": true
+    },
+    "index": 42
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      },
+      "propertyKey": {
+        "type": "well-known-symbol",
+        "name": "unscopables"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      }
+    },
+    "index": 43
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "literal"
+    },
+    "index": 44
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "console"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": "globalThis"
+      }
+    },
+    "index": 45
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "src-obj",
+      "id": 1,
+      "objectType": "object"
+    },
+    "index": 46
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "get",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 1
+      },
+      "propertyKey": {
+        "type": "literal",
+        "value": "log"
+      },
+      "receiver": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 1
+      }
+    },
+    "index": 47
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "src-obj",
+      "id": 2,
+      "objectType": "function"
+    },
+    "index": 48
+  },
+  {
+    "type": "action-to-dry",
+    "action": {
+      "type": "apply",
+      "target": {
+        "type": "dst-obj",
+        "objectType": "function",
+        "id": 2
+      },
+      "thisArg": {
+        "type": "dst-obj",
+        "objectType": "object",
+        "id": 1
+      },
+      "args": [
+        {
+          "type": "literal",
+          "value": "Incrementing counter from 2 to 3"
+        }
+      ]
+    },
+    "index": 49
+  },
+  {
+    "type": "return-from-dry",
+    "result": {
+      "type": "literal"
+    },
+    "index": 50
+  },
+  {
+    "type": "return-from-wet",
+    "result": {
+      "type": "literal",
+      "value": 3
+    },
+    "index": 51
+  }
+]
