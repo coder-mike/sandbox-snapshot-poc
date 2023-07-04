@@ -1,5 +1,7 @@
 # Working demonstration of snapshotting in node.js by IO replay
 
+This is a quick weekend project to demonstrate how you can implement something like Microvium snapshotting in node.js without native engine support for snapshotting. It works by running the app in a sandbox surrounded by a membrane and recording all IO to/from the sandbox, to replay at a later stage to reconstruct the exact state of the sandbox in a different running process.
+
 ## App
 
 The file [app.js](#file-app-js) represents a JavaScript application whose process we want to be able to snapshot to a file and then later resume from the snapshot file to continue where it left off. It demonstrates access to IO (via the `console`) and statefulness (via the `counter` variable).
